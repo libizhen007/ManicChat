@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bz</groupId>
+	<artifactId>ManicChat</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ManicChat</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<!--spring-core, spring-context, spring-web and spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			<version>4.1.1.RELEASE</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+		<!--WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<!-- jstl标签及其依赖 -->
+
+		<!-- <dependency> <groupId>javax.servlet.jsp.jstl</groupId> <artifactId>jstl</artifactId> 
+			<version>1.2</version> </dependency> -->
+		<!-- 如果是使用上面的<groupId>javax.servlet.jsp.jstl</groupId>则会导致，org/apache/taglibs/standard/tag/rt/core/UrlTag 
+			所以需要添加以下依赖。但是！在使用某一标签的时候会导致javax.servlet.jsp.jstl.core.LoopTag！ 所以为了稳妥起见，一般使用 
+			<groupId>javax.servlet</groupId> 这个依赖 -->
+		<!-- <dependency> <groupId>taglibs</groupId> <artifactId>standard</artifactId> 
+			<version>1.1.2</version> </dependency> -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- mysql驱动和 c3p0连接池 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
+
+		<!-- commons-dbutils -->
+		<dependency>
+			<groupId>commons-dbutils</groupId>
+			<artifactId>commons-dbutils</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<!--spring aop  -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.8.2</version>
+		</dependency>
+		
+			<!--json  -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		
+		
+		<!--file  -->
+		<dependency>
+	    	<groupId>commons-fileupload</groupId>
+	   	 	<artifactId>commons-fileupload</artifactId>
+	   	 	<version>1.2.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>ManicChat</finalName>
+		<defaultGoal>compile</defaultGoal>
+		<pluginManagement>
+		<plugins> 
+		<plugin> 
+		<groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-compiler-plugin</artifactId> 
+		<configuration> 
+		<source>1.7</source> 
+		<target>1.7</target> 
+		</configuration> 
+		</plugin>
+		</plugins>
+		</pluginManagement>
+	</build>
+</project>

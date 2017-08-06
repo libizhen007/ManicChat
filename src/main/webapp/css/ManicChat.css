@@ -1,0 +1,236 @@
+@CHARSET "UTF-8";
+body{
+	margin:0px;
+	padding: 0px;
+	background: url("../image/mainBackground.jpg") no-repeat center;
+	/* min-height:900px;
+	min-width:1500px; */
+	background-size:cover;
+	-webkit-background-size: cover;/* 兼容Webkit内核浏览器如Chrome和Safari */
+	-o-background-size: cover;/* 兼容Opera */ 
+	
+	/* background-attachment属性设置背景图像是否固定或者随着页面的其余部分滚动，当设置为fixed时页面的其余部分滚动时，背景图像不会移动。  */
+	background-attachment:fixed; 
+	
+	/*margin-bottom:800px;/* 背景全屏 */ 
+
+}
+
+#bizhen{/* 关键 */
+	/* 为什么会出现这样错位的问题呢？我们来分析一下。首先要知道，top区域宽度100%，是相对于浏览器来说的。就上图而言，这里有个等式：红色边框宽度（nav） = 绿色区域（top）+空白区域。当浏览器窗口变小，而且浏览器的宽度小于nav区域的1000px时
+		当我们把下面的滚动条拉到最右边时，发现出了错。那我们应该怎么来修改这个错误，就用到了min-width属性，意思是最小宽度。 */
+	min-width: 1800px;/* 200+700+200+350+200 */
+	min-height: 750px;
+	
+	margin-top: 50px;
+}
+#my-list{
+	width:200px;
+	height: 500px;
+ 	border: 2px solid #99CCFF;
+/* 	border-radius:30px; */
+	
+	float: right; 
+/* 	position:absolute; */
+	
+	
+	
+	
+}
+.current-user{
+	height: 45px;
+	margin-bottom:-0px;
+	color: #000;
+	
+	-webkit-filter: opacity(80%); /* Chrome, Safari, Opera 支持*/
+    filter: opacity(80%);/* 其他不支持的浏览器，大概 */
+}
+#chat-window{
+	/* border: 3px solid blue; */
+	width: 700px;
+	height: 500px;
+	float: right; 
+
+}
+
+#chat-from{
+	
+	height: 325px;
+	text-align:left;
+	overflow-x: hidden;
+	/* overflow-y: visible; */
+	overflow-y: scroll;
+}
+
+#chat-utils{
+	border: 2px solid #99CCFF;
+	height:50px;
+}
+#chat-my{
+	
+	height: 80px;
+	-webkit-filter: opacity(80%); /* Chrome, Safari, Opera 支持*/
+    filter: opacity(80%);/* 其他不支持的浏览器，大概 */
+}
+#chat-list{
+	border: 2px solid #99CCFF;
+	width: 200px;
+	height: 500px;
+	float: right;  
+/* 	position:absolute; */
+
+    font-family: Microsoft YaHei;
+    overflow-y:auto;
+	
+}
+
+
+
+	
+/* 统一透明居中 */
+.panel,#group_menu,#friend_menu{
+	
+	-webkit-filter: opacity(80%); 
+    filter: opacity(80%); 
+}
+
+/* 好友列表 */
+#friend-list{
+	/* max-height: 450px; */
+	overflow-y:auto;
+}
+
+/* 调整好友列表除第一个分组外的所有分组外边距 */
+.adjust{
+	margin-top: -20px;
+	
+}
+
+/* 分组伸缩 */
+#friend-list .flex{
+	cursor:pointer;/* 变手 */
+}
+
+/* 伸缩图片大小 */
+.flex-img{
+	height: 20px;
+	float: right;
+}
+/* 注册客服 、转移分组和修改备注 */
+#change{
+	width: 200px;
+	height: 200px;
+	float: right;
+	margin-right: 200px;
+/* 	margin-top: 150px; */
+	/*
+	display:none;不占位隐藏
+	visibility:hidden;占位隐藏
+  */
+   	visibility:hidden;  
+  	
+	
+}
+
+/* 气泡 */
+.left-bubble,.right-bubble{
+	/* margin-left: 20px; */
+	margin-top: 10px;
+}
+
+/* .right-bubble{
+	 position: absolute;
+	 right: 5px;
+} */
+/* 左边气泡内容 698 */
+.from-left-content{
+
+	background-color:#66FFCC;
+	/* height: 40px; */
+	max-width: 600px;
+	margin-left: 5px;
+	border-radius:10px;
+	/* text-indent:20px; */
+	-webkit-filter: opacity(80%); /* Chrome, Safari, Opera 支持*/
+    filter: opacity(80%);/* 其他不支持的浏览器，大概 */
+    
+    word-break:break-all;
+}
+/* 右边气泡内容 */
+.from-right-content{
+	margin-left:77px;/* 经过计算得出，通过F12得到元素详细比例*/
+	background-color:#66CCFF;
+	max-width: 600px;
+	/* float:right; */
+	border-radius:10px;
+	/* text-indent:20px; */
+	-webkit-filter: opacity(80%); /* Chrome, Safari, Opera 支持*/
+    filter: opacity(80%);/* 其他不支持的浏览器，大概 */
+    
+    word-break:break-all;
+}
+	/* 在chrome中文本域textarea既没有黄框又不能拖拽的办法： */
+textarea{
+	outline:none;resize:none;
+	
+}
+
+/* 修改用户密码 */
+#user-manage,.addServices,#addFriends,.getServicesLink{
+	cursor:pointer;/* 变手 */
+}
+.badge{
+	float: right;
+	margin-top: 3px;
+}
+
+.change-close,.dismiss{
+	float: right;
+	cursor:pointer;/* 变手 */
+	
+	
+}
+
+/* .serivce{
+	border-bottom: solid 1px red;
+} */
+
+.chat-time{
+	color: red;
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: -5px;
+}
+
+pre{
+	
+	font-size: 18px;
+}
+
+ul{
+	text-align: center;
+}
+
+.query,.shift{
+	text-align: center;
+}
+
+.sendChatImg{
+	max-height: 250px;
+	max-width: 500px;
+	margin-left: 280px;
+}
+
+.receiveChatImg{
+	max-height: 250px;
+	max-width: 500px;
+	margin-left: 20px;
+}
+.chatImga{
+	cursor:pointer;
+}
+
+.sendChatFile{
+	padding: 9.5px;
+	background-color: #CCCCFF;
+}

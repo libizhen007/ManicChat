@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+                           http://www.springframework.org/schema/context  
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd  
+                           http://www.springframework.org/schema/websocket   
+                           http://www.springframework.org/schema/websocket/spring-websocket.xsd
+                           http://www.springframework.org/schema/mvc
+						   http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						   http://www.springframework.org/schema/aop 
+						   http://www.springframework.org/schema/aop/spring-aop-4.1.xsd" default-lazy-init="true">
+						   
+
+<context:component-scan base-package="com.bz.magicchat.handler"/>
+
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+
+ <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+ 	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/manicchat"/>
+ 	<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+ 	<property name="user" value="root"/>
+ 	<property name="password" value="31129772"/>
+ 	<property name="acquireIncrement" value="3"/>
+ 	<property name="initialPoolSize" value="50"/>
+ 	<property name="minPoolSize" value="2"/>
+ 	<property name="maxPoolSize" value="100"/>
+ </bean>
+
+ <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner"/>
+ 
+ <bean id="usersDaoInter" class="com.bz.magicchat.dao.imp.UsersDaoImp"/>
+ 
+ <bean id="usersService" class="com.bz.magicchat.service.UsersService"/>
+ 
+ <bean id="groupsDaoInter" class="com.bz.magicchat.dao.imp.GroupsDaoImp"/>
+ 
+ <bean id="groupsService" class="com.bz.magicchat.service.GroupsService"/>
+ 
+ <bean id="friednsDaoInter" class="com.bz.magicchat.dao.imp.FriendsDaoImp"/>
+ 
+ <bean id="friednsService" class="com.bz.magicchat.service.FriendsService"/>
+ 
+ 
+ <!-- aop -->
+	<!--定义切面  -->
+ <bean name="aspectClass" class="com.bz.magicchat.util.AOPAspectManage"></bean>
+	
+	<aop:config>
+		<!--.* 或者*  -->
+
+		<aop:pointcut expression="execution(* com.bz.magicchat.dao.*.*..*(..)) and args(..,connection)" id="closePointcut"/>
+		
+		<aop:aspect	ref="aspectClass">
+			
+			<aop:after method="closeConnection(java.sql.Connection)" pointcut-ref="closePointcut" arg-names="connection"/>
+ 
+		</aop:aspect>
+	</aop:config>
+	
+	
+
+	
+	<!-- WebSocket主菜 -->
+		<!--用于支持com.bz.demo.HandshakeInterceptor  -->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/><!-- 实现Controller了的HandlerAdapter -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+	
+	<bean id="usersWebSocketMap" class="java.util.concurrent.ConcurrentHashMap"/>
+	<bean id="friendIdsMap" class="java.util.concurrent.ConcurrentHashMap"/>
+	<bean id="serviceList" class="java.util.concurrent.ConcurrentHashMap"/>
+
+	<!--支持映射.后缀  -->
+	<bean id="usersWebsocket" class="com.bz.magicchat.websocket.UsersWebSocket" >
+		<property name="usersWebSocketMap" ref="usersWebSocketMap"/>
+		<property name="friendIdsMap" ref="friendIdsMap"/>
+		<property name="serviceList" ref="serviceList"/>
+
+	</bean>  
+	
+	<websocket:handlers >  
+	    <websocket:mapping path="/createWebsocket.ws" handler="usersWebsocket"/>  
+	    	<websocket:handshake-interceptors>  
+	    		<bean class="com.bz.magicchat.interceptor.HandshakeInterceptor"/>  
+	   	 </websocket:handshake-interceptors>  
+	   	 
+	</websocket:handlers>  
+		
+	<!-- 配置上传文件解析器  CommonsMultipartResolver解析器依赖commons-fileupload和commons-io-->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	
+	<!-- 用户拦截 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<mvc:exclude-mapping path="/index.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<mvc:exclude-mapping path="/logout.do"/>
+			<mvc:exclude-mapping path="/registerUser.do"/>
+			<mvc:exclude-mapping path="/getVCode.do"/>
+			<mvc:exclude-mapping path="/clientConnect.do"/>
+			<mvc:exclude-mapping path="/clientLogout.do"/>
+			<mvc:exclude-mapping path="/initChat.do"/>
+			<mvc:exclude-mapping path="/uploadUserImg.do"/>
+			<bean class="com.bz.magicchat.interceptor.UserInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

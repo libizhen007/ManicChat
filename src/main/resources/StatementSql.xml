@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql>
+	<sql>
+		<users_sql_select>
+			SELECT * FROM users WHERE userid=?
+		</users_sql_select>
+		
+		<users_sql_insert>
+			INSERT INTO users VALUES(?,?,?,?,?,?)
+		</users_sql_insert>
+		
+		<users_sql_update_nickname>
+			UPDATE users SET nickname=? WHERE userid=?
+		</users_sql_update_nickname>
+		
+		<users_sql_update_upassword>
+			UPDATE users SET upassword=? WHERE userid=?
+		</users_sql_update_upassword>
+		
+		
+		
+		<groups_sql_select>
+			SELECT * FROM groups WHERE affiliation_user=?
+		</groups_sql_select>
+		
+		<groups_sql_insert>
+			INSERT INTO groups VALUES(?,?,?)
+		</groups_sql_insert>
+		
+		<groups_sql_delete>
+			DELETE FROM groups WHERE group_id=?
+		</groups_sql_delete>
+		
+		<groups_sql_update>
+			UPDATE groups SET group_name=? WHERE group_id=?
+		</groups_sql_update>
+		
+		
+		<friends_sql_select>
+			SELECT * FROM friends WHERE affiliation_user=?
+		</friends_sql_select>
+
+		<!-- 添加之前查询当前用户是否已经是好友 -->
+		<friends_sql_add_select>
+			SELECT * FROM friends WHERE affiliation_user=? AND friend_id=?
+		</friends_sql_add_select>
+		
+		<friends_sql_insert>
+			INSERT INTO friends VALUES(?,?,?,?,?)
+		</friends_sql_insert>
+		
+		<friends_sql_update_cname>
+			UPDATE friends SET friend_cname=? WHERE friend_id=? AND affiliation_user=? 
+		</friends_sql_update_cname>
+		
+		<friends_sql_update_group>
+			UPDATE friends SET affiliation_group=? WHERE friend_id=? AND affiliation_user=? 
+		</friends_sql_update_group>
+		
+		<friends_sql_delete>
+		<!-- 	DELETE FROM friends WHERE friend_id=? AND affiliation_user=?  -->
+				DELETE FROM friends WHERE (friend_id=? AND affiliation_user=?) OR (friend_id=? AND affiliation_user=?)
+		</friends_sql_delete>
+		<!-- 	删除客服  -->
+		<users_sql_delete_service>
+				DELETE FROM users WHERE userid=?
+		</users_sql_delete_service>
+		
+		<!--  
+		<service_sql_select>
+			SELECT * FROM services WHERE affiliation_user=?
+		</service_sql_select>
+		
+		<service_sql_insert>
+			INSERT INTO services VALUES(?,?,?,?,?,?)
+		</service_sql_insert>
+-->
+		
+	</sql>
+</sql>
