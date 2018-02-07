@@ -909,7 +909,7 @@ function openConnect(userid,usertype,affiliation_user) {
 //		 alert("正确");
 		if ('WebSocket' in window) {
 			socket = new WebSocket(
-					'ws://127.0.0.1:8080/ManicChat/createWebsocket.ws');
+					'ws://haihihi.cn/createWebsocket.ws');
 
 		}
 		socket.onopen = function() {
@@ -1609,6 +1609,6 @@ function getServiceLink(usertype,userid){
 		alert("当前登录的用户不是企业类型，不能进行客服添加！");
 		return false;
 	}else{
-		prompt("将以下链接复制到你的网站任意位置即可与当前在线的客服进行聊天", "127.0.0.1:8080/ManicChat/jsp/clientConnect.jsp?bossId=" + userid);
+		prompt("将以下链接复制到你的网站任意位置即可与当前在线的客服进行聊天", "haihihi.cn/jsp/clientConnect.jsp?bossId=" + userid);
 	}
 }

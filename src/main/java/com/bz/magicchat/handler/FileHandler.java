@@ -32,7 +32,7 @@ public class FileHandler {
 				//String savePath = session.getServletContext().getRealPath("uploadFile");
 				//File uploadPic = new java.io.File(savePath, newFileName);
 				//如果是使用vps就用这个吧
-				File uploadPic = new java.io.File("E:/files",newFileName);
+				File uploadPic = new java.io.File("/usr/haihihi/files",newFileName);
 				if(!uploadPic.exists()){
 					uploadPic.mkdirs();
 				}
@@ -55,7 +55,7 @@ public class FileHandler {
 				//上传文件
 				//String savePath = session.getServletContext().getRealPath("uploadFile");
 				//File uploadPic = new java.io.File(savePath, newFileName);
-				File uploadPic = new java.io.File("E:/files",newFileName);
+				File uploadPic = new java.io.File("/usr/haihihi/files",newFileName);
 				if(!uploadPic.exists()){
 					uploadPic.mkdirs();
 				}

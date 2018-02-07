@@ -31,6 +31,7 @@
  	<property name="initialPoolSize" value="50"/>
  	<property name="minPoolSize" value="2"/>
  	<property name="maxPoolSize" value="100"/>
+	<property name="idleConnectionTestPeriod" value="18000"/>
  </bean>
 
  <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner"/>
